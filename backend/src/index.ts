@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import moviesRouter from "./routes/movies";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT =  3001;
 const MONGODB_URI = process.env.MONGODB_URI || "";
 
 app.use(cors());

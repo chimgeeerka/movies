@@ -58,3 +58,22 @@ export const getMovieById = async (
     res.status(500).json({ message: "Server error" });
   }
 };
+
+
+
+
+export const getMovieGenre = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const genres: string[] = await Movie.distinct("genres");
+    console.log("hello")
+    res.status(200).json({
+      genre: genres,
+    });
+  } catch (error) {
+    console.error("Error fetching genres:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
