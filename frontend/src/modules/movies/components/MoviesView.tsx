@@ -7,19 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { MovieCard } from "./MovieCard";
 import { MovieCardSkeleton } from "./MovieCardSkeleton";
+import {useGenre} from "../hooks/useGenres"
 
-const GENRES = [
-  "Action",
-  "Comedy",
-  "Drama",
-  "Horror",
-  "Romance",
-  "Thriller",
-  "Animation",
-  "Documentary",
-  "Crime",
-  "Sci-Fi"
-];
 
 const MoviesView = () => {
   const navigate = useNavigate();
@@ -38,7 +27,10 @@ const MoviesView = () => {
     search: search || undefined,
     genre: selectedGenre || undefined
   });
-
+const {
+  data: genres,
+  isLoading: genreLoading,
+} = useGenre(); 
   const movies = data?.movies ?? [];
   const totalPages = data?.totalPages ?? 1;
   const total = data?.total ?? 0;
@@ -52,7 +44,14 @@ const MoviesView = () => {
     const newGenre = selectedGenre === genre ? "" : genre;
     setSearchParams({ search, genre: newGenre, page: "1" });
   };
+  if(genreLoading) {
 
+    return <div>
+      loadin 
+    </div>
+  }
+
+  // console.log(genres)
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm border-b">
@@ -92,7 +91,7 @@ const MoviesView = () => {
           >
             All
           </Button>
-          {GENRES.map(genre => (
+          {genres.map(genre => (
             <Button
               key={genre}
               variant={selectedGenre === genre ? "default" : "outline"}

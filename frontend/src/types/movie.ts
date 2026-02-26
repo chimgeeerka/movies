@@ -50,4 +50,5 @@ export interface MoviesResponse {
   page: number;
   limit: number;
   totalPages: number;
-}
+}; 
+

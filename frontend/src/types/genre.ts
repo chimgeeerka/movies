@@ -1,0 +1,3 @@
+interface GenresResponse{
+  genres: string[];
+};

@@ -67,7 +67,8 @@ const MovieDetailView = () => {
 
   const { data: movie, isLoading, isError } = useMovie(id ?? "");
 
-  if (isLoading) return <DetailSkeleton />;
+
+if (isLoading) return <DetailSkeleton />;
 
   if (isError || !movie) {
     return (

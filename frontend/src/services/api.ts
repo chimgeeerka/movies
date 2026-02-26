@@ -1,8 +1,10 @@
 import axios from "axios";
 import type { Movie, MoviesResponse } from "@/types/movie";
-
+interface GenreResponse {
+  genre: string[];
+}
 const api = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "http://localhost:3001/api",
   timeout: 10000
 });
 
@@ -25,4 +27,9 @@ export const getMovie = async (id: string): Promise<Movie> => {
   return data;
 };
 
-export default api;
+
+
+export const getGenre = async (): Promise<string[]> => {
+  const { data } = await api.get<GenreResponse>("/movies/genres");
+  return data.genre;
+};
